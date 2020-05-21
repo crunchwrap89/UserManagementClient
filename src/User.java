@@ -12,10 +12,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getFirstName() {
+	public String getName() {
 		return name;
 	}
-	public void setFirstName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public String getSurname() {
