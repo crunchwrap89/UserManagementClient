@@ -12,7 +12,7 @@ public class TestClient {
 
 	public static void main(String[] args) {
 		Client client = ClientBuilder.newClient();
-		Response response = client.target("")
+		Response response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildGet().invoke();
 		
 		User employee = response.readEntity(User.class);
@@ -24,13 +24,13 @@ public class TestClient {
 		
 		Entity benEntity = Entity.entity(alfred, "application/XML");
 		
-		response = client.target("http://localhost:8080/EmployeeManagement/webservice/employees")
+		response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildPost(benEntity).invoke();
 //		System.out.println(response.readEntity(User.class).getId());
 		response.close();
 		
 		
-		response = client.target("http://localhost:8080/EmployeeManagement/webservice/employees")
+		response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildGet().invoke();
 		List<User> users = response.readEntity(new GenericType<List<User>>() {});
 		
