@@ -15,8 +15,8 @@ public class TestClient {
 		Response response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildGet().invoke();
 		
-		User employee = response.readEntity(User.class);
-		System.out.println(employee);
+		User user = response.readEntity(User.class);
+		System.out.println(user);
 		response.close();
 		
 		User alfred = new User();
