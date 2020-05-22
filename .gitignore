@@ -12,3 +12,4 @@ local.properties
 *.class
 build.xml
 UserManagementServerClasses.jar
+.classpath
