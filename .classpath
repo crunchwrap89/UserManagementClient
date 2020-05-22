@@ -95,5 +95,6 @@
 	<classpathentry kind="lib" path="lib/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/weld-se-2.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/woodstox-core-asl-4.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Macoo/eclipse-workspace/UserManagementServerApplication/dist/UserManagementServerClasses.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
