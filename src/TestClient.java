@@ -12,31 +12,31 @@ public class TestClient {
 
 	public static void main(String[] args) {
 		Client client = ClientBuilder.newClient();
-		Response response = client.target("http://localhost:8080/UserManagement/webservice/users")
-				.request().buildGet().invoke();
+//		Response response = client.target("http://localhost:8080/UserManagement/webservice/users")
+//				.request().buildGet().invoke();
+//		
+//		User1 user2 = response.readEntity(User1.class);
+//		System.out.println(user2);
+//		response.close();
 		
-		User user = response.readEntity(User.class);
-		System.out.println(user);
-		response.close();
-		
-		User alfred = new User();
+		User1 alfred = new User1();
 		alfred.setName("Alfred");
 		alfred.setSurname("Alfredsson");
 		
 		
 		Entity benEntity = Entity.entity(alfred, "application/XML");
 		
-		response = client.target("http://localhost:8080/UserManagement/webservice/users")
+		Response response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildPost(benEntity).invoke();
-//		System.out.println(response.readEntity(User.class).getId());
+		System.out.println(response.readEntity(User1.class).getId());
 		response.close();
 		
 		
 		response = client.target("http://localhost:8080/UserManagement/webservice/users")
 				.request().buildGet().invoke();
-		List<User> users = response.readEntity(new GenericType<List<User>>() {});
+		List<User1> users = response.readEntity(new GenericType<List<User1>>() {});
 		
-		for (User u : users) {
+		for (User1 u : users) {
 			System.out.println(u);
 		}
 	}

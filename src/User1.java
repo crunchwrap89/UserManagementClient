@@ -1,7 +1,7 @@
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class User {
+public class User1 {
 
 	private int id;
 	private String name;
