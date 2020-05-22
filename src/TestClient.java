@@ -20,7 +20,9 @@ public class TestClient {
 		response.close();
 		
 		User alfred = new User();
-
+		alfred.setName("Alfred");
+		alfred.setSurname("Alfredsson");
+		
 		
 		Entity benEntity = Entity.entity(alfred, "application/XML");
 		
