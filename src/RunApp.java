@@ -46,7 +46,7 @@ public class RunApp {
 					continue;
 				} else if (i == 4) {
 					editUser();
-					sc.nextLine();
+
 					continue;
 				}else if (i == 5) {
 					System.out.println("Hare gött!");
