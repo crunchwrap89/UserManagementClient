@@ -22,7 +22,8 @@ public class RunApp {
 			System.out.println(" 1. Registrera en ny användare");
 			System.out.println(" 2. Lista alla användare");
 			System.out.println(" 3. Söka på användarid");
-			System.out.println(" 4. Avsluta");
+			System.out.println(" 4. Ändra användare");
+			System.out.println(" 5. Avsluta");
 
 			if (sc.hasNextInt() == false) {
 				System.err.println("Du måste ange ett nummer");
@@ -44,6 +45,10 @@ public class RunApp {
 					sc.nextLine();
 					continue;
 				} else if (i == 4) {
+					editUser();
+					sc.nextLine();
+					continue;
+				}else if (i == 5) {
 					System.out.println("Hare gött!");
 					System.exit(0);
 				}
@@ -101,6 +106,44 @@ public class RunApp {
 		response.close();
 
 	}
+	
+	public static void editUser() {
+		Scanner sc2 = new Scanner(System.in);
+		int idnummer;
+		while (true) {
+			System.out.println("skriv in id på användaren du vill ändra");
+			
+			if (sc2.hasNextInt() == false) {
+				System.err.println("Du måste ange ett nummer");
+				sc2.nextLine();
+				continue;
+			} else {
+				idnummer = sc2.nextInt();
+				break;
+			}
+		}
+		System.out.println("Skriv in nytt förnamn på användaren");
+		sc.nextLine();
+		s = sc.nextLine();
+		System.out.println("Skriv in nytt efternamn på användaren");
+		s1 = sc.nextLine();
+		sendEditedUser(idnummer, s, s1);
+//		System.out.println(idnummer + " " + s + " " + s1);
+	}
+	
+	public static void sendEditedUser(int id, String namn, String surname) {
+		Client client = ClientBuilder.newClient();
+		User1 anvandare = new User1();
+		anvandare.setName(namn);
+		anvandare.setSurname(surname);
+		String idnummer = "http://localhost:8080/UserManagement/webservice/users/" + id;
+		Entity alfredity = Entity.entity(anvandare, "application/XML");
+		Response response = client.target(idnummer).request()
+				.buildPut(alfredity).invoke();
+//		System.out.println(response.readEntity(User1.class).getId());
+		response.close();
+	}
+	
 
 	// Metod som skriver ut alla användare
 	public static void listAll() {
