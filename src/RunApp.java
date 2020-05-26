@@ -23,7 +23,8 @@ public class RunApp {
 			System.out.println(" 2. Lista alla användare");
 			System.out.println(" 3. Söka på användarid");
 			System.out.println(" 4. Ändra användare");
-			System.out.println(" 5. Avsluta");
+			System.out.println(" 5. Ta bort användare");
+			System.out.println(" 6. Avsluta");
 
 			if (sc.hasNextInt() == false) {
 				System.err.println("Du måste ange ett nummer");
@@ -46,9 +47,11 @@ public class RunApp {
 					continue;
 				} else if (i == 4) {
 					editUser();
-
 					continue;
 				}else if (i == 5) {
+					deleteUser();
+					continue;
+				}else if (i == 6) {
 					System.out.println("Hare gött!");
 					System.exit(0);
 				}
@@ -107,6 +110,31 @@ public class RunApp {
 
 	}
 	
+	public static void deleteUser() {
+		while (true) {
+			System.out.println("skriv in id på användaren du vill ta bort");
+			Scanner sc2 = new Scanner(System.in);
+			if (sc2.hasNextInt() == false) {
+				System.err.println("Du måste ange ett nummer");
+				sc2.nextLine();
+				continue;
+			} else {
+				try {
+					String idnummer = "http://localhost:8080/UserManagement/webservice/users/" + sc2.nextInt();
+					Client client = ClientBuilder.newClient();
+					Response response = client.target(idnummer).request().buildDelete().invoke();
+//					User1 user2 = response.readEntity(User1.class);
+//					System.out.println(user2);
+					response.close();
+
+				} catch (ProcessingException e) {
+					System.err.println("Kunde inte hitta någon person med det id:t");
+				}
+				break;
+			}
+		}
+	}
+	
 	public static void editUser() {
 		Scanner sc2 = new Scanner(System.in);
 		int idnummer;
@@ -131,10 +159,10 @@ public class RunApp {
 //		System.out.println(idnummer + " " + s + " " + s1);
 	}
 	
-	public static void sendEditedUser(int id, String namn, String surname) {
+	public static void sendEditedUser(int id, String name, String surname) {
 		Client client = ClientBuilder.newClient();
 		User1 anvandare = new User1();
-		anvandare.setName(namn);
+		anvandare.setName(name);
 		anvandare.setSurname(surname);
 		String idnummer = "http://localhost:8080/UserManagement/webservice/users/" + id;
 		Entity alfredity = Entity.entity(anvandare, "application/XML");
