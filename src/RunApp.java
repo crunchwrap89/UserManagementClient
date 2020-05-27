@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -123,11 +124,11 @@ public class RunApp {
 					String idnummer = "http://localhost:8080/UserManagement/webservice/users/" + sc2.nextInt();
 					Client client = ClientBuilder.newClient();
 					Response response = client.target(idnummer).request().buildDelete().invoke();
-//					User1 user2 = response.readEntity(User1.class);
-//					System.out.println(user2);
 					response.close();
 
 				} catch (ProcessingException e) {
+					System.err.println("Kunde inte hitta någon person med det id:t");
+				} catch (NoResultException e) {
 					System.err.println("Kunde inte hitta någon person med det id:t");
 				}
 				break;
