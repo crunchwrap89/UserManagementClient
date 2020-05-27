@@ -8,7 +8,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-public class TestClient {
+public class Main {
 
 	public static void main(String[] args) {	
 		RunApp a = new RunApp();
